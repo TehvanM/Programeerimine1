@@ -2,26 +2,85 @@
 # 16.01.24
 # Iseseisev
 
+
+
+
+
+
+# 14. Palkade vÃµrdlus - Loo palk.txt fail tÃ¶Ã¶tajate nime, soo ja palganumbriga (10 tÃ¶Ã¶tajat).
+# 	Koosta programm, mis analÃ¼Ã¼sib kas firmas toimub diskrimineerimist soo jÃ¤rgi. Selleks vÃµrdle omavahel meeste ja naiste palkade keskmiseid, samuti meeste ja naiste kÃµige kÃµrgemat palka. Programm peab tegema otsuse.
+
+        # Hubert Hunt m 2340
+        # Siim Siil m 2570
+        # MÃ¤rt MÃ¤ger m 1960
+        # Vilma Vihmauss n 2060
+        # Merike Metskits n 2250
+        # Kati Karu n 2370
+        # Elmar Elevant m 2900
+        # Timoteus Tigu m 2850
+        # Reet Rebane n 2340
+        # Kalev Kaamel m 2570
+        # Karmen Kass n 2120
+        # Kornelius Koer m 2250
+
+
+
+with open("palk.txt", "r") as file:
+    sisu = file.read()
+    file.close()
+
+sisu = sisu.split("\n")
+mees = []
+naine = []
+for i in sisu:
+    i = i.split(" ")
+    if i [2] == "m":
+        mees.append(i[3])
+    else:
+        naine.append(i[3])
+
+mees = [int(i) for i in mees]
+naine = [int(i) for i in naine]
+
+meesKeskmine = sum(mees)/len(mees)
+naineKeskmine = sum(naine)/len(naine)
+
+meesSuurim = max(mees)
+naineSuurim = max(naine)
+
+if meesKeskmine > naineKeskmine:
+    print("Meeste keskmine palk on suurem.")
+else:
+    print("Naiste keskmine palk on suurem.")
+
+if meesSuurim > naineSuurim:
+    print("Meeste suurim palk on suurem.")
+else:
+    print("Naiste suurim palk on suurem.")
+
+
+
 # 12. Eurokalkulaator
 # 	Koosta programm, mis kalkuleerib valuuta vastavalt kasutaja soovile EUR->EEK vĆµi EEK->EUR.
 # 	Oluline on kasutada kahte funktsiooni!!
 
-def eur2eek(eur):
+def eureek(eur):
     return eur*15.6466
 
-def eek2eur(eek):
+def eekeur(eek):
     return eek/15.6466 
 
 print("EUR EEK või EEK EUR") 
 valik = input("Sisesta valik: ")
 if valik == "EUR EEK":
     eur = int(input("Sisesta EUR: "))
-    print(str(eur) + " EUR on " + str(eur2eek(eur)) + " EEK.")
+    print(str(eur) + " EUR on " + str(eureek(eur)) + " EEK.")
 elif valik == "EEK EUR":
     eek = int(input("Sisesta EEK: "))
-    print(str(eek) + " EEK on " + str(eek2eur(eek)) + " EUR.")
+    print(str(eek) + " EEK on " + str(eekeur(eek)) + " EUR.")
 else:
     print("Vale valik.")
+
 
 
 

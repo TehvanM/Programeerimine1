@@ -6,6 +6,22 @@
 # 	Koosta programm, mis kalkuleerib valuuta vastavalt kasutaja soovile EUR->EEK vĆµi EEK->EUR.
 # 	Oluline on kasutada kahte funktsiooni!!
 
+def eur2eek(eur):
+    return eur*15.6466
+
+def eek2eur(eek):
+    return eek/15.6466 
+
+print("EUR EEK või EEK EUR") 
+valik = input("Sisesta valik: ")
+if valik == "EUR EEK":
+    eur = int(input("Sisesta EUR: "))
+    print(str(eur) + " EUR on " + str(eur2eek(eur)) + " EEK.")
+elif valik == "EEK EUR":
+    eek = int(input("Sisesta EEK: "))
+    print(str(eek) + " EEK on " + str(eek2eur(eek)) + " EUR.")
+else:
+    print("Vale valik.")
 
 
 

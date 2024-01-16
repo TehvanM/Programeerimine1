@@ -2,6 +2,35 @@
 # 16.01.24
 # Iseseisev
 
+# 16. TÃ¤ringud
+# 	Kasutaja vÃµistleb kahe tÃ¤ringuga arvuti vastu. Kasutaja teeb pakkumise ning suurima tÃ¤ringupunktisumma vÃµitja saab laual oleva raha endale juurde. MÃ¤ng kestab kuni kummalgi on raha otsas.
+# 	(Vihjed: kÃ¼si kasutajalt nime, kuva pidevalt konto seisu ja tÃ¤ringuviskeid, kasutajate raha hulga mÃ¤ngu alguses mÃ¤Ã¤rad sina)
+
+import random
+kasutaja = input("Sisesta kasutajanimi: ")
+raha = int(input("Sisesta raha: "))
+arvuti = 100
+while raha > 0 and arvuti > 0:
+    print("Kasutaja raha: " + str(raha))
+    print("Arvuti raha: " + str(arvuti))
+    print("Kasutaja viskab tärningut.")
+    kasutajaTäring = random.randint(1,6) + random.randint(1,6)
+    print("Arvuti viskab tärningut.")
+    arvutiTäring = random.randint(1,6) + random.randint(1,6)
+    print("Kasutaja tulemus: " + str(kasutajaTäring))
+    print("Arvuti tulemus: " + str(arvutiTäring))
+    if kasutajaTäring > arvutiTäring:
+        print("Kasutaja võitis.")
+        raha = raha + 10
+        arvuti = arvuti - 10
+    elif kasutajaTäring < arvutiTäring:
+        print("Arvuti võitis.")
+        raha = raha - 10
+        arvuti = arvuti + 10
+    else:
+        print("Viik.")
+print("Mäng läbi.")
+
 
 
 

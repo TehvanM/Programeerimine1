@@ -8,30 +8,36 @@
 
 import random
 
-kasutaja = input("Sisesta kasutajanimi: ")
-raha = int(input("Sisesta raha: "))
-arvuti = 100
-while raha > 0 and arvuti > 0:
-    print("Kasutaja raha: " + str(raha))
-    print("Arvuti raha: " + str(arvuti))
-    print("Kasutaja viskab tärningut.")
-    kasutajaTäring = random.randint(1,6) + random.randint(1,6)
-    print("Arvuti viskab tärningut.")
-    arvutiTäring = random.randint(1,6) + random.randint(1,6)
-    print("Kasutaja tulemus: " + str(kasutajaTäring))
-    print("Arvuti tulemus: " + str(arvutiTäring))
-    if kasutajaTäring > arvutiTäring:
-        print("Kasutaja võitis.")
-        raha = raha + 10
-        arvuti = arvuti - 10
-    elif kasutajaTäring < arvutiTäring:
-        print("Arvuti võitis.")
-        raha = raha - 10
-        arvuti = arvuti + 10
-    else:
-        print("Viik.")
-print("Mäng läbi.")
 
+def täringud():
+    kasutaja = input("Sisesta nimi: ")
+    raha = int(input("Sisesta raha: "))
+    # ausalt võiks olla see arvuti raha random
+    arvuti = 123 + random.randint(1,100)
+    while raha > 0 and arvuti > 0:
+        print(f"{kasutaja} raha: {raha}")
+        print(f"Arvuti raha: {arvuti}")
+        print(f"{kasutaja} viskab tärningu")
+        # veits unfair no?
+        ktäring = random.randint(1,6) + random.randint(1,6)
+        print("Arvuti viskab tärningut")
+        atäring = random.randint(1,6) 
+        print(f"{kasutaja} tulemus: {ktäring}")
+        print(f"Arvuti tulemus: {atäring}")
+        # las nad panevad mõlevad all in poh kuigi juhend vist tahab et mingi kümne kaupa paneks vms aga noh nii on kiirem ja true to irl xd
+        if ktäring > atäring:
+            print(f"{kasutaja} võitis")
+            arvuti -= raha
+        elif ktäring < atäring:
+            print("Arvuti võitis")
+            raha -= arvuti
+        else:
+            print("viik")
+        if raha == 0 or arvuti == 0:
+            break
+    print("mäng läbi")
+
+täringud()
 
 
 
@@ -51,66 +57,70 @@ print("Mäng läbi.")
         # Karmen Kass n 2120
         # Kornelius Koer m 2250
 
+# tuleb välja et see UTF-8 on üli vajalik muidu üldse ei toimi
+def palgad():
+    fail = open("palk.txt", encoding="UTF-8")
+    sisu = fail.read()
+    fail.close()
 
-fail = open("palk.txt", encoding="UTF-8")
-sisu = fail.read()
-fail.close()
+    # see split \n on vaja selleks et saada listi iga rida eraldi yk
+    read = sisu.split("\n")
+    mees = []
+    naine =[]
+    # see split(" ") on vajalik selleks et saada listi iga sõna eraldi
+    for rida in read:
+        osad = rida.split(" ")
+        # kontrollib rea algusest tühikuid ja kui peale kolmandat tühikut on m siis lisame mees listi kui n siis naine listi
+        if osad[2] == "m":
+            mees.append(int(osad[3]))
+        else:
+            naine.append(int(osad[3]))
 
+    # arvutame meeste ja naiste keskmise palga
+    mkeskmine = sum(mees)/len(mees)
+    nkeskmine = sum(naine)/len(naine)
 
-sisu = sisu.split("\n")
-mees = []
-naine = []
-for i in sisu:
-    i = i.split(" ")
-    if i [2] == "m":
-        mees.append(i[3])
+    # arvutame meeste ja naiste kõrgeima palga
+    mkõrgeim = max(mees)
+    nkõrgeim = max(naine)
+
+    # kontrollime kas meeste keskmine on suurem kui naiste keskmine
+    if mkeskmine > nkeskmine:
+        print("Meeste keskmine palk on suurem ")
     else:
-        naine.append(i[3])
+        print("Naiste keskmine palk on suurem ")
 
-mees = [int(i) for i in mees]
-naine = [int(i) for i in naine]
+    # kontrollime kas meeste kõrgeim palk on suurem kui naiste kõrgeim palk
+    if mkõrgeim > nkõrgeim:
+        print("Meeste kõrgeim palk on suurem ")
+    else:
+        print("Naiste kõrgeim palk on suurem ")
 
-meesKeskmine = sum(mees)/len(mees)
-naineKeskmine = sum(naine)/len(naine)
-
-meesSuurim = max(mees)
-naineSuurim = max(naine)
-
-if meesKeskmine > naineKeskmine:
-    print("Meeste keskmine palk on suurem.")
-else:
-    print("Naiste keskmine palk on suurem.")
-
-if meesSuurim > naineSuurim:
-    print("Meeste suurim palk on suurem.")
-else:
-    print("Naiste suurim palk on suurem.")
-
+palgad()
 
 
 # 12. Eurokalkulaator
 # 	Koosta programm, mis kalkuleerib valuuta vastavalt kasutaja soovile EUR->EEK vĆµi EEK->EUR.
 # 	Oluline on kasutada kahte funktsiooni!!
 
-def eureek(eur):
-    return eur*15.6466
+def euro():
+    raha = int(input("Sisesta raha: "))
+    print(f"{raha} eurot on {raha*15.64} krooni")
 
-def eekeur(eek):
-    return eek/15.6466 
+def kroon():
+    raha = int(input("Sisesta raha: "))
+    print(f"{raha} krooni on {raha/15.64} eurot")
 
-print("EUR EEK või EEK EUR") 
-valik = input("Sisesta valik: ")
-if valik == "EUR EEK":
-    eur = int(input("Sisesta EUR: "))
-    print(str(eur) + " EUR on " + str(eureek(eur)) + " EEK.")
-elif valik == "EEK EUR":
-    eek = int(input("Sisesta EEK: "))
-    print(str(eek) + " EEK on " + str(eekeur(eek)) + " EUR.")
-else:
-    print("Vale valik.")
+def põhi():
+    vali = input("Vali euro või kroon: ")
+    if vali == "euro":
+        euro()
+    elif vali == "kroon":
+        kroon()
+    else:
+        print("Vale valik")
 
-
-
+põhi()
 
 # 10. KaugushĆ¼pe
 # 	kasutaja sisestab 3 kaugushĆ¼ppe tulemust - 1p
@@ -118,44 +128,57 @@ else:
 # 	programmi dialoog kasutajaga on arusaadav ja Ć¼heselt mĆµistetav - 1p
 # 	kood kommenteeritud - 1p
 
-for i in range(3):
-    tulemus = int(input("Sisesta tulemus: "))
-    if i == 0:
-        parim = tulemus
-        keskmine = tulemus
-    else:
-        if tulemus > parim:
-            parim = tulemus
-        keskmine = keskmine + tulemus
+def kaugus():
+    esimene = int(input("Sisesta esimene tulemus: "))
+    teine = int(input("Sisesta teine tulemus: "))
+    kolmas = int(input("Sisesta kolmas tulemus: "))
+    parim = max(esimene, teine, kolmas)
+    keskmine = (esimene + teine + kolmas)/3
 
-print("Parim tulemus: " + str(parim))
-print("Keskmine tulemus: " + str(keskmine/3))
+    print(f"Parim tulemus: {parim}")
+    print(f"Keskmine tulemus: {keskmine}")
 
+kaugus()
 
 
 
 # 8. Täringud
-# 	kuvatakse korrektne arusaadav kĆ¼simus ja hiljem vastus - 1p
-# 	kasutaja vĆµistleb kahe tĆ¤ringuga arvuti vastu - 1p
-# 	kasutaja teeb pakkumise ning suurima tĆ¤ringupunktisumma vĆµitja saab laual oleva raha endale - 2p
+# 	kuvatakse korrektne arusaadav küsimus ja hiljem vastus - 1p
+# 	kasutaja võistleb kahe täringuga arvuti vastu - 1p
+# 	kasutaja teeb pakkumise ning suurima täringupunktisumma võitja saab laual oleva raha endale - 2p
 # 	kood kommenteeritud - 1p
-
 import random
-Panus = int(input("Sisesta panus: "))
-
-kasutaja = random.randint(1,6) + random.randint(1, 6)
-arvuti = random.randint(1,6)
-print("Kasutaja tulemus: " + str(kasutaja))
-print("arvuti tulemus: " + str(arvuti))
-
-if kasutaja > arvuti:
-    print("Kasutaja võitis " + str(Panus) + " eurot.")
-elif kasutaja < arvuti:
-    print("Arvuti võitis " + str(Panus) + " eurot.")
-else:
-    print("Viik.")
 
 
+def täringud2():
+    kasutaja = input("Sisesta nimi: ")
+    raha = int(input("Sisesta raha: "))
+    # ausalt võiks olla see arvuti raha random
+    arvuti = 123 + random.randint(1,100)
+    while raha > 0 and arvuti > 0:
+        print(f"{kasutaja} raha: {raha}")
+        print(f"Arvuti raha: {arvuti}")
+        print(f"{kasutaja} viskab tärningu")
+        # veits unfair no?
+        ktäring = random.randint(1,6) + random.randint(1,6)
+        print("Arvuti viskab tärningut")
+        atäring = random.randint(1,6) 
+        print(f"{kasutaja} tulemus: {ktäring}")
+        print(f"Arvuti tulemus: {atäring}")
+        # las nad panevad mõlevad all in poh kuigi juhend vist tahab et mingi kümne kaupa paneks vms aga noh nii on kiirem ja true to irl xd
+        if ktäring > atäring:
+            print(f"{kasutaja} võitis")
+            arvuti -= raha
+        elif ktäring < atäring:
+            print("Arvuti võitis")
+            raha -= arvuti
+        else:
+            print("viik")
+        if raha == 0 or arvuti == 0:
+            break
+    print("mäng läbi")
+
+täringud2()
 
 # 6. Koosta programm, mis kontrollib, kas kasutaja poolt sisestatud arv on paaris vĆµi paaritu
 # 	kuvatakse korrektne arusaadav kĆ¼simus ja vastus - 1p
@@ -164,11 +187,16 @@ else:
 # 	kuvatakse programmi pealkiri - 1p
 # 	kood kommenteeritud - 1p
 
-arv1 = int(input("sisesta number: "))
-if arv1 % 2 == 0:
-    print("arv on paariga.")
-else:
-    print("arv on paaritu.")
+def number():
+    arv = int(input("sisesta arv: "))
+    if arv == 0:
+        print("arv on null")
+    elif arv % 2 == 0:
+        print("arv on paaris")
+    else:
+        print("arv on paaritu")
+
+number()
 
 
 # 4. List Less Than Ten
@@ -178,11 +206,13 @@ else:
 # 	Write this in one line of Python. 1p
 # 	Ask the user for a number and return a list that contains only elements from the original list a that are smaller than that number given by the user. 1p
 	
+def vk10():
 
-print([i for i in [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89] if i < 5])
-num = int(input("Sisesta number: "))
-print([i for i in [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89] if i < num])
+    print([i for i in [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89] if i < 5])
+    num = int(input("Sisesta number: "))
+    print([i for i in [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89] if i < num])
 
+vk10()
 
 
 # 2. Vanused
@@ -190,25 +220,17 @@ print([i for i in [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89] if i < num])
 # 	leia numbrite suurim ja vĆ¤ikseim arv  1p
 # 	kogusumma  1p
 # 	keskmine 1p
+def vanused():
+    vanused = [10,34,12,54,12,34,45,83,46,76,4,7,94,56,26,8,4,83,87,35,76,3,22,43,6,2,26,34,25,28,24]
 
+    väiksemArv = min(vanused)
+    suurimArv = max(vanused)
+    koguSumma =sum(vanused)
+    keskmineArv = koguSumma/len(vanused)
 
+    print(f"Väikseim arv on {väiksemArv}, suurim arv on {suurimArv}, kogusumma on {koguSumma} ja keskmine arv on {keskmineArv}.")
 
-
-vanused = [10,34,12,54,12,34,45,83,46,76,4,7,94,56,26,8,4,83,87,35,76,3,22,43,6,2,26,34,25,28,24]
-
-väiksemArv = min(vanused)
-suurimArv = max(vanused)
-koguSumma =sum(vanused)
-keskmineArv = koguSumma/len(vanused)
-
-kõik = dir() 
-  # saadud https://www.geeksforgeeks.org/viewing-all-defined-variables-in-python/
-for i in kõik: 
-    if not i.startswith('__'): 
-        myvalue = eval(i) 
-        print(i , myvalue) 
-
-
+vanused()
 
 
 

@@ -5,7 +5,7 @@
 # 16. TÃ¤ringud
 # 	Kasutaja vÃµistleb kahe tÃ¤ringuga arvuti vastu. Kasutaja teeb pakkumise ning suurima tÃ¤ringupunktisumma vÃµitja saab laual oleva raha endale juurde. MÃ¤ng kestab kuni kummalgi on raha otsas.
 # 	(Vihjed: kÃ¼si kasutajalt nime, kuva pidevalt konto seisu ja tÃ¤ringuviskeid, kasutajate raha hulga mÃ¤ngu alguses mÃ¤Ã¤rad sina)
-"""
+
 import random
 
 kasutaja = input("Sisesta kasutajanimi: ")
@@ -32,7 +32,7 @@ while raha > 0 and arvuti > 0:
         print("Viik.")
 print("Mäng läbi.")
 
-"""
+
 
 
 # 14. Palkade võrdlus - Loo palk.txt fail tÃ¶Ã¶tajate nime, soo ja palganumbriga.
@@ -51,9 +51,6 @@ print("Mäng läbi.")
         # Karmen Kass n 2120
         # Kornelius Koer m 2250
 
-
-
-import os
 
 fail = open("palk.txt", encoding="UTF-8")
 sisu = fail.read()

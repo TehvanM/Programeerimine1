@@ -5,8 +5,9 @@
 # 16. TÃ¤ringud
 # 	Kasutaja vÃµistleb kahe tÃ¤ringuga arvuti vastu. Kasutaja teeb pakkumise ning suurima tÃ¤ringupunktisumma vÃµitja saab laual oleva raha endale juurde. MÃ¤ng kestab kuni kummalgi on raha otsas.
 # 	(Vihjed: kÃ¼si kasutajalt nime, kuva pidevalt konto seisu ja tÃ¤ringuviskeid, kasutajate raha hulga mÃ¤ngu alguses mÃ¤Ã¤rad sina)
-
+"""
 import random
+
 kasutaja = input("Sisesta kasutajanimi: ")
 raha = int(input("Sisesta raha: "))
 arvuti = 100
@@ -31,13 +32,11 @@ while raha > 0 and arvuti > 0:
         print("Viik.")
 print("Mäng läbi.")
 
+"""
 
 
-
-
-
-# 14. Palkade vÃµrdlus - Loo palk.txt fail tÃ¶Ã¶tajate nime, soo ja palganumbriga (10 tÃ¶Ã¶tajat).
-# 	Koosta programm, mis analÃ¼Ã¼sib kas firmas toimub diskrimineerimist soo jÃ¤rgi. Selleks vÃµrdle omavahel meeste ja naiste palkade keskmiseid, samuti meeste ja naiste kÃµige kÃµrgemat palka. Programm peab tegema otsuse.
+# 14. Palkade võrdlus - Loo palk.txt fail tÃ¶Ã¶tajate nime, soo ja palganumbriga.
+# 	Koosta programm, mis analüüsib kas firmas toimub diskrimineerimist soo järgi. Selleks võrdle omavahel meeste ja naiste palkade keskmiseid, samuti meeste ja naiste kÃµige kÃµrgemat palka. Programm peab tegema otsuse.
 
         # Hubert Hunt m 2340
         # Siim Siil m 2570
@@ -54,9 +53,12 @@ print("Mäng läbi.")
 
 
 
-with open("palk.txt", "r") as file:
-    sisu = file.read()
-    file.close()
+import os
+
+fail = open("palk.txt", encoding="UTF-8")
+sisu = fail.read()
+fail.close()
+
 
 sisu = sisu.split("\n")
 mees = []

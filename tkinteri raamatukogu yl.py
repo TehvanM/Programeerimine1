@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import csv
 import uuid
+import os
 
 class Library:
     def __init__(self):
@@ -39,12 +40,16 @@ class Library:
         self.readers = [reader for reader in self.readers if reader['id'] != reader_id]
 
     def save_data(self):
-        with open('books.csv', 'w', newline='') as csvfile:
+        desktop_path = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+        books_file_path = os.path.join(desktop_path, 'books.csv')
+        readers_file_path = os.path.join(desktop_path, 'readers.csv')
+
+        with open(books_file_path, 'w', newline='') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=['id', 'title', 'author', 'year'])
             writer.writeheader()
             writer.writerows(self.books)
 
-        with open('readers.csv', 'w', newline='') as csvfile:
+        with open(readers_file_path, 'w', newline='') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=['id', 'name', 'contact'])
             writer.writeheader()
             writer.writerows(self.readers)
@@ -82,7 +87,15 @@ def open_csv_files():
     refresh_readers_listbox()
     messagebox.showinfo("Success", "CSV files opened successfully.")
 
+def salvesta_csv_failid():
+    library.save_data()
+    messagebox.showinfo("Edu", "Andmed salvestati edukalt.")
+
+
 root = tk.Tk()
+
+tk.Button(root, text='Ava CSV-failid', command=open_csv_files).grid(row=0, column=0, sticky=tk.W, pady=4)
+tk.Button(root, text='Salvesta CSV-failid', command=salvesta_csv_failid).grid(row=0, column=1, sticky=tk.E, pady=4)
 
 tk.Button(root, text='Open CSV Files', command=open_csv_files).grid(row=0, column=0, sticky=tk.W, pady=4)
 
@@ -106,6 +119,10 @@ contact_entry = tk.Entry(root)
 
 name_entry.grid(row=4, column=1)
 contact_entry.grid(row=5, column=1)
+
+def close_window():
+    salvesta_csv_failid()
+    root.destroy()
 
 def add_book():
     title = title_entry.get()
@@ -201,4 +218,10 @@ tk.Button(root, text='Modify Reader', command=modify_reader).grid(row=9, column=
 tk.Button(root, text='Delete Reader', command=delete_reader).grid(row=9, column=1, sticky=tk.W, pady=4)
 
 root.mainloop()
+
+
+
+
+
+
 

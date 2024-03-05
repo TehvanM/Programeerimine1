@@ -1,3 +1,24 @@
+
+# Raamatukogu laenutussĆ¼steemi arendamine
+
+# EesmĆ¤rk: Luua Pythoni ja Tkinteri abil rakendus, mis haldab raamatukogu laenutustegevust. Rakendus vĆµimaldab kasutajatel sisestada, vaadata, muuta ja kustutada teavet laenutatud raamatute ja lugejate kohta. Iga laenutuse kohta genereeritakse sĆ¼steemi lisamisel unikaalne laenutus-ID.
+
+# Funktsionaalsus:
+# * Raamatute ja lugejate andmete sisestamine: Kasutajad saavad sisestada raamatute (pealkiri, autor, vĆ¤ljaandeaasta) ja lugejate (nimi, kontaktandmed) andmeid. Iga uue laenutuse puhul genereerib sĆ¼steem unikaalse laenutus-ID.
+# * Laenutuste vaatamine: Rakendus kuvab kĆµik aktiivsed laenutused, sealhulgas raamatu pealkirja, autori, lugeja nime ja laenutusperioodi. Kasutajad saavad otsida laenutusi laenutus-ID, lugeja nime vĆµi raamatu pealkirja alusel.
+# * Laenutuste muutmine ja kustutamine: Kasutajad saavad pikendada laenutusperioode, muuta lugeja kontaktandmeid vĆµi kustutada laenutusi sĆ¼steemist.
+# * Andmete salvestamine: Andmed salvestatakse failisĆ¼steemi, kasutades CSV vĆµi TXT failivormingut, mis vĆµimaldab hĆµlpsat andmete haldamist ja taaskasutamist.
+
+# NĆµuded:
+# * Kasutajaliides tuleb luua Tkinteri abil, et pakkuda kasutajasĆµbralikku ja intuitiivset navigeerimist.
+# * Rakendus peab tagama andmete jĆ¤rjepidevuse ja turvalisuse, kasutades failipĆµhist salvestusviisi.
+# * Unikaalse laenutus-ID genereerimine peab tagama, et iga laenutus on selgelt identifitseeritav.
+# * Rakendus peab vĆµimaldama raamatute ja lugejate andmete lihtsat sisestamist, muutmist ja kustutamist, samuti laenutusprotsessi haldamist.
+# * Failid peavad olema kĆ¤ttesaadavad Githubis
+
+
+
+
 from ctypes import LibraryLoader
 import tkinter as tk
 import csv
@@ -220,25 +241,4 @@ tk.Button(root, text='Modify Reader', command=lambda: library.modify_reader(read
 tk.Button(root, text='Delete Reader', command=lambda: library.delete_reader(readers_listbox.get(tk.ACTIVE))).grid(row=8, column=1, sticky=tk.W, pady=4)
 
 root.mainloop()
-
-library.load_data()
-library.view_books()
-library.view_readers()
-library.save_data()
-library.view_books()
-library.view_readers()
-library.load_data()
-library.view_books()
-library.view_readers()
-library.save_data()
-library.view_books()
-library.view_readers()
-library.load_data()
-library.view_books()
-library.view_readers()
-library.save_data()
-library.view_books()
-
-# Compare this snippet from gpt.py:
-#             messagebox.showinfo("Lugejad", "Lugejate nimekiri on tühi.")
 

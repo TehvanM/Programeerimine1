@@ -201,4 +201,4 @@ tk.Button(root, text='Modify Reader', command=modify_reader).grid(row=9, column=
 tk.Button(root, text='Delete Reader', command=delete_reader).grid(row=9, column=1, sticky=tk.W, pady=4)
 
 root.mainloop()
-library.save_data()
+
